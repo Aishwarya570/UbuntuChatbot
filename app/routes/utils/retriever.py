@@ -13,11 +13,12 @@ class Retriever:
         faiss_path = os.path.join(FAISS_FOLDER, os.path.basename(EMBEDDING_MODEL))  # Ensure correct path
         self.vectorstore = FAISS.load_local(faiss_path, self.embeddings, allow_dangerous_deserialization=True)
 
-    def search(self, query, top_k=6):
+    def search(self, query, top_k=8):
         
         """Search FAISS for the most relevant Markdown content."""
         logger.info(f'Finding {top_k} similar search docs to query: {query}')
         docs = self.vectorstore.similarity_search(query, k=top_k)
+        # print(f"Here is the docs  {docs}")
         return "\n\n".join([doc.page_content for doc in docs])
 
 if __name__ == "__main__":

@@ -46,10 +46,14 @@ class Generator:
             ) 
         
         
-        return self.llm.invoke(prompt_v2)
+        for chunk in self.llm.stream(prompt_v2):
+            if chunk.content:
+                yield chunk.content
+        
 
 if __name__ == "__main__":
     generator = Generator()
     query = "How do I install a package using apt in Ubuntu?"
     context = "To install a package using `apt` in Ubuntu, use the command: `sudo apt install <package-name>`."
-    print(generator.generate(query, context))
+    for text in generator.generate(query, context):
+        print(text, end = "", flush = True)
