@@ -18,7 +18,6 @@ class Retriever:
         """Search FAISS for the most relevant Markdown content."""
         logger.info(f'Finding {top_k} similar search docs to query: {query}')
         docs = self.vectorstore.similarity_search(query, k=top_k)
-        logger.info(f"Length of docs:  {len(docs)}")
         return "\n\n".join([doc.page_content for doc in docs])
 
 if __name__ == "__main__":
