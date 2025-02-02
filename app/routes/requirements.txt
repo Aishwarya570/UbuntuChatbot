@@ -1,0 +1,13 @@
+transformers 
+sentence-transformers 
+faiss-cpu 
+openai 
+langchain
+markdown-it-py 
+tiktoken
+langchain_community
+langchain-huggingface
+einops
+fastapi
+langchain-openai
+uvicorn
